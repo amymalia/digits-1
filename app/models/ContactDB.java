@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Stores the Contacts for this application.
- *
+ * <p>
  * Created by Branden Ogata on 3/14/2015.
  */
 public class ContactDB {
@@ -16,18 +16,17 @@ public class ContactDB {
   /**
    * Adds the given Contact to this ContactDB if valid.
    *
-   * @param toAdd    The Contact to add to this ContactDB.
-   *
+   * @param toAdd The Contact to add to this ContactDB.
    * @return A boolean that is true if the given Contact is valid,
-   *                           false otherwise.
-   *
+   * false otherwise.
    */
 
   public static boolean addContact(Contact toAdd) {
     // If not in the map, add new Contact
     if (toAdd.isValid() && toAdd.getId() == 0) {
       long id = ContactDB.contacts.size() + 1;
-      ContactDB.contacts.put(id, new Contact(id, toAdd.getFirstName(), toAdd.getLastName(), toAdd.getPhoneNumber()));
+      ContactDB.contacts.put(id, new Contact(id, toAdd.getFirstName(), toAdd.getLastName(),
+          toAdd.getPhoneNumber(), toAdd.getAddress()));
       return true;
     }
     // Else if valid and in the map, update value
@@ -44,7 +43,6 @@ public class ContactDB {
    * Returns the List of Contacts stored in this ContactDB.
    *
    * @return A List<Contact> of the Contacts stored in this ContactDB.
-   *
    */
 
   public static List<Contact> getContacts() {
@@ -54,11 +52,9 @@ public class ContactDB {
   /**
    * Returns the Contact with the given ID number.
    *
-   * @param id    The long equal to the ID to search for.
-   *
+   * @param id The long equal to the ID to search for.
    * @return A Contact that is at the given ID,
-   *         null if no match was found.
-   *
+   * null if no match was found.
    */
 
   public static Contact getContact(long id) {

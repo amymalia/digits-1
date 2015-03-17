@@ -38,6 +38,16 @@
                value="@contactForm("phoneNumber").value"
                placeholder="Enter your phone number">
           <span class="help-block">@{contactForm("phoneNumber").error.map {error => error.message}}</span>
+
+          <div class="form-group @if(contactForm("address").hasErrors) {has-error}">
+              <label for="address">Address</label>
+              <input type="tel"
+              class="form-control"
+              id="@contactForm("address").id"
+              name="@contactForm("address").name"
+              value="@contactForm("address").value"
+              placeholder="Enter your address">
+              <span class="help-block">@{contactForm("address").error.map {error => error.message}}</span>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     }
