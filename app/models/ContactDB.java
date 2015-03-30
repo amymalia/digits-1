@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class ContactDB {
   private static Map<Long, Contact> contacts = new HashMap<>();
+  private static long lastId = 1;
 
   /**
    * Adds the given Contact to this ContactDB if valid.
@@ -26,8 +27,10 @@ public class ContactDB {
   public static boolean addContact(Contact toAdd) {
     // If not in the map, add new Contact
     if (toAdd.isValid() && toAdd.getId() == 0) {
-      long id = ContactDB.contacts.size() + 1;
-      ContactDB.contacts.put(id, new Contact(id, toAdd.getFirstName(), toAdd.getLastName(), toAdd.getPhoneNumber()));
+      long id = lastId++;
+      ContactDB.contacts.put(id, new Contact(id, toAdd.getFirstName(), toAdd.getLastName(),
+                                             toAdd.getPhoneNumber(), toAdd.getAddress(),
+                                             toAdd.getTelephoneType()));
       return true;
     }
     // Else if valid and in the map, update value
@@ -63,5 +66,16 @@ public class ContactDB {
 
   public static Contact getContact(long id) {
     return ContactDB.contacts.get(id);
+  }
+
+  /**
+   * Deletes the Contact with the given ID number.
+   *
+   * @param id    The long equal to the ID of the Contact to delete.
+   *
+   */
+
+  public static void deleteContact(long id) {
+    ContactDB.contacts.remove(id);
   }
 }
