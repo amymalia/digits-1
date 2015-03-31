@@ -52,7 +52,7 @@ public class TelephoneTypes {
   public static Map<String, Boolean> getTypes(String toSelect) {
     Map<String, Boolean> phoneTypes = getTypes();
 
-    if (TelephoneTypes.isType(toSelect)) {
+    if (DietTypes.isType(toSelect)) {
       phoneTypes.put(toSelect, true);
     }
 

@@ -48,6 +48,12 @@ public class ContactFormData {
    */
   public String telephoneType = "";
 
+  /**
+   * The diet types of the contact.
+   *
+   */
+  public List<String> dietTypes = new ArrayList();
+
 
   /**
    * Creates a new ContactFormData instance.
@@ -55,7 +61,7 @@ public class ContactFormData {
    */
 
   public ContactFormData() {
-    this(new Contact(0, "", "", "", "", ""));
+    this(new Contact(0, "", "", "", "", "", new ArrayList()));
   }
 
   /**
@@ -72,6 +78,7 @@ public class ContactFormData {
     this.phoneNumber = toCreate.getPhoneNumber();
     this.address = toCreate.getAddress();
     this.telephoneType = toCreate.getTelephoneType();
+    this.dietTypes = toCreate.getDietType();
   }
 
   /**
@@ -99,6 +106,9 @@ public class ContactFormData {
     }
     if ((this.telephoneType == null) || (!TelephoneTypes.isType(this.telephoneType))) {
       errors.add(new ValidationError("telephoneType", "Invalid telephone type"));
+    }
+    if ((this.dietTypes == null) || (!DietTypes.isType(this.dietTypes))) {
+      errors.add(new ValidationError("dietType", "Invalid diet type"));
     }
 
     return (errors.isEmpty()) ? (null) : (errors);

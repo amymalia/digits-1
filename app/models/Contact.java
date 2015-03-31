@@ -1,6 +1,9 @@
 package models;
 
+import views.formdata.DietTypes;
 import views.formdata.TelephoneTypes;
+
+import java.util.List;
 
 /**
  * A contact in this application.
@@ -14,6 +17,7 @@ public class Contact {
   private long id;
   private String address;
   private String telephoneType;
+  private List<String> dietType;
 
   /**
    * Creates a new Contact.
@@ -24,17 +28,19 @@ public class Contact {
    * @param phoneNumber      The String containing the phone number of the new Contact.
    * @param address          The String containing the address of the new Contact.
    * @param telephoneType    The String containing the telephone type of the new Contact.
+   * @param dietType        The String containing the diet type of the new Contact.
    *
    */
 
   public Contact(long id, String firstName, String lastName,
-                 String phoneNumber, String address, String telephoneType) {
+                 String phoneNumber, String address, String telephoneType, List<String> dietType) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phoneNumber = phoneNumber;
     this.address = address;
     this.telephoneType = telephoneType;
+    this.dietType = dietType;
   }
 
   /**
@@ -103,6 +109,35 @@ public class Contact {
     return this.telephoneType;
   }
 
+
+
+  /**
+   * Returns the telephone type of this Contact.
+   *
+   * @return A String containing the telephone type of this Contact.
+   *
+   */
+
+  public List<String> getDietType() {
+    return this.dietType;
+  }
+
+  /**
+   * Returns the diet type of this Contact.
+   *
+   * @return A String containing the diet type of this Contact.
+   *
+   */
+
+  public String getFormattedDietType() {
+    String s = "";
+    for(String type : this.dietType) {
+      s = s + type + ", ";
+    }
+    return s;
+  }
+
+
   /**
    * Indicates whether this is a valid Contact.
    *
@@ -116,6 +151,7 @@ public class Contact {
          && ((this.lastName != null) && (this.lastName.length() > 0))
          && ((this.phoneNumber != null) && (this.phoneNumber.matches("\\d{3}-\\d{3}-\\d{4}")))
          && ((this.telephoneType != null) && (TelephoneTypes.isType(this.telephoneType)))
-         && ((this.address != null) && (this.address.length() >= 24)));
+         && ((this.address != null) && (this.address.length() >= 24)))
+         && ((this.dietType != null) && (DietTypes.isType(this.dietType)));
   }
 }
